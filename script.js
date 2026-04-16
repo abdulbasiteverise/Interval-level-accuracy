@@ -19,9 +19,13 @@ const State = {
   },
   rawData: [],
   calcData: [],
+  latestSummary: null,
+  decisionSummary: null,
+  simulatorDecisionText: '',
   charts: {},
   chatHistory: []
 };
+const STATE = State;
 
 /* ── Utility ──────────────────────────────────────────────── */
 const $ = id => document.getElementById(id);
@@ -52,6 +56,11 @@ function minutesToTime(min) {
   const h = Math.floor(min / 60) % 24;
   const m = min % 60;
   return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function formatIntervalRange(intervals) {
+  if (!intervals.length) return 'N/A';
+  return `${intervals[0].interval}–${intervals[intervals.length - 1].interval}`;
 }
 
 /* ── Interval Generator ───────────────────────────────────── */
@@ -124,9 +133,15 @@ function calculate(rawData, totalForecast, weights) {
 
     // 3. Forecast split
     const forecast = totalForecast * wDist;
+    const forecastAHT = 360; // 6 minutes baseline
 
     // 4. Accuracy
     const actual = row.actual;
+    const volumeShift = forecast > 0 ? (actual - forecast) / forecast : 0;
+    const actualAHT = Math.max(280, forecastAHT + volumeShift * 80);
+    const requiredFTE = (actual * actualAHT) / 1800 / 0.85;
+    const staffedFTE = (forecast * forecastAHT) / 1800 / 0.85;
+    const gap = staffedFTE - requiredFTE;
     const baseline = row.baseline;
     const yourErr = actual > 0 ? Math.abs(actual - forecast) / actual * 100 : 0;
     const baseErr = actual > 0 ? Math.abs(actual - baseline) / actual * 100 : 0;
@@ -150,9 +165,106 @@ function calculate(rawData, totalForecast, weights) {
       improvement,
       flag,
       dist5: dist5*100, dist4: dist4*100, dist3: dist3*100,
-      dist2: dist2*100, dist1: dist1*100
+      dist2: dist2*100, dist1: dist1*100,
+      forecastAHT,
+      actualAHT,
+      requiredFTE,
+      staffedFTE,
+      gap
     };
   });
+}
+
+function summarizeOperationalMetrics(intervals) {
+  if (!intervals.length) return null;
+  const totalActual = intervals.reduce((s, r) => s + r.actual, 0);
+  const totalForecast = intervals.reduce((s, r) => s + r.forecast, 0);
+  const totalVariance = totalActual - totalForecast;
+  const volumeVariancePct = totalForecast > 0 ? totalVariance / totalForecast * 100 : 0;
+  const avgAHTDiff = intervals.reduce((s, r) => s + (r.actualAHT - r.forecastAHT), 0) / intervals.length;
+  const avgGap = intervals.reduce((s, r) => s + r.gap, 0) / intervals.length;
+  const totalGap = intervals.reduce((s, r) => s + r.gap, 0);
+  const worstIntervals = [...intervals].sort((a, b) => a.gap - b.gap).slice(0, 3);
+  const backlogRisk = Math.max(0, Math.round(worstIntervals.reduce((s, r) => s + Math.abs(Math.min(0, r.gap)) * 8, 0)));
+  return {
+    totalActual,
+    totalForecast,
+    totalVariance,
+    volumeVariancePct,
+    avgAHTDiff,
+    avgGap,
+    totalGap,
+    worstIntervals,
+    backlogRisk
+  };
+}
+
+function generateDecisionEngine(intervals, summary) {
+  if (!intervals.length || !summary) {
+    return { rootCause: 'No data available', impact: 'No impact calculated', actions: [] };
+  }
+
+  const causes = [];
+  if (summary.volumeVariancePct > 10) causes.push('Volume spike');
+  if (summary.avgAHTDiff > 15) causes.push('AHT increase');
+  if (summary.avgGap < -3) causes.push('Understaffing');
+  if (!causes.length) causes.push('Demand-capacity balance stable');
+
+  let rootCause = causes.join(' + ');
+  if (causes.length > 1 && causes.includes('Understaffing')) {
+    const nonGap = causes.filter(c => c !== 'Understaffing');
+    rootCause = nonGap.length ? `${nonGap.join(' + ')} causing understaffing` : rootCause;
+  }
+
+  const worstRange = formatIntervalRange([...summary.worstIntervals].sort((a, b) => timeToMinutes(a.interval) - timeToMinutes(b.interval)));
+  const impact = `Understaffed by ${fmtNum(Math.abs(summary.totalGap))} FTE across peak intervals (${worstRange}), backlog risk ~${fmtNum(summary.backlogRisk)} calls`;
+
+  const actions = [];
+  if (summary.totalGap < -10) {
+    actions.push(`Add ${Math.ceil(Math.abs(summary.totalGap) / 2)} agents via OT`);
+  }
+  if (summary.worstIntervals.length) {
+    actions.push('Shift agents from low-volume intervals');
+  }
+  if (summary.avgAHTDiff > 15) {
+    actions.push('Add buffer staffing due to longer handling time');
+  }
+  if (summary.avgGap > 2 || summary.totalGap > 5) {
+    actions.push('Offer VTO or reduce staffing');
+  }
+  if (!actions.length) actions.push('Maintain current plan and monitor next intraday refresh');
+
+  return { rootCause, impact, actions };
+}
+
+function generateSimulatorDecisionOutput(summary) {
+  if (!summary) return '';
+  const currentGap = Math.round(summary.totalGap);
+  const improvedGap = Math.round(currentGap * 0.25);
+  const reduction = Math.max(10, Math.min(70, Math.round((1 - Math.abs(improvedGap) / Math.max(1, Math.abs(currentGap))) * 50)));
+  return `If applied: Gap improves from ${currentGap} → ${improvedGap}. SLA risk reduces significantly (~${reduction}%).`;
+}
+
+function renderDecisionSummary() {
+  const root = $('decision-root-cause');
+  const impact = $('decision-impact');
+  const actions = $('decision-actions');
+  const sim = $('decision-simulator-output');
+  if (!root || !impact || !actions || !sim) return;
+
+  const decision = State.decisionSummary;
+  if (!decision) {
+    root.textContent = 'Load data to detect root cause.';
+    impact.textContent = 'Impact will appear after calculation.';
+    actions.innerHTML = '<li>No recommended actions yet.</li>';
+    sim.textContent = '';
+    return;
+  }
+
+  root.textContent = decision.rootCause;
+  impact.textContent = decision.impact;
+  actions.innerHTML = decision.actions.map(a => `<li>${a}</li>`).join('');
+  sim.textContent = State.simulatorDecisionText;
 }
 
 /* ── 4-Hour Rolling Window ────────────────────────────────── */
@@ -682,6 +794,7 @@ function generateEmail(type = 'daily') {
     summary: `[WFM Weekly Summary] ILA Performance Report by Abdul Basit WFM`
   };
 
+  const eodLeadershipSummary = generateEODSummary();
   const bodies = {
     daily: `Hi Team,
 
@@ -734,29 +847,15 @@ IMMEDIATE ACTIONS REQUIRED:
 Sent automatically by BasitWFM AI | Abdul Basit WFM
 Do not reply to this message.`,
 
-    summary: `WFM WEEKLY PERFORMANCE SUMMARY
+    summary: `EXECUTIVE EOD REPORT
 Generated by BasitWFM AI | Abdul Basit WFM
 
-PERIOD: Week ending ${today}
+DATE: ${today}
 
-ILA PERFORMANCE SCORECARD
-──────────────────────────────
-• Average Model Error: ${fmtPct(d.reduce((s,r)=>s+r.yourErr,0)/d.length)}
-• Average Baseline Error: ${fmtPct(d.reduce((s,r)=>s+r.baseErr,0)/d.length)}
-• Net ILA Improvement: ${avgImp>0?'+':''}${fmtPct(avgImp)}
-• Intervals Analysed: ${d.length}
-• Total Volume Handled: ${fmtNum(totalActual)}
+${eodLeadershipSummary}
 
-TOP PERFORMING INTERVALS
-──────────────────────────────
-${[...d].sort((a,b)=>a.yourErr-b.yourErr).slice(0,3).map((r,i)=>`${i+1}. ${r.interval} — Error: ${fmtPct(r.yourErr)}`).join('\n')}
-
-IMPROVEMENT OPPORTUNITIES
-──────────────────────────────
-${[...d].sort((a,b)=>b.yourErr-a.yourErr).slice(0,3).map((r,i)=>`${i+1}. ${r.interval} — Error: ${fmtPct(r.yourErr)} | Improvement needed: ${fmtPct(r.yourErr - r.baseErr)}`).join('\n')}
-
-This report is automatically generated. Please review with your planning team.
-Abdul Basit WFM | BasitWFM AI Decision Engine`
+Leadership Note:
+Please validate OT deployment before 11:00 and confirm tomorrow's shrinkage assumptions in the planning huddle.`
   };
 
   const preview = $('email-preview');
@@ -766,6 +865,27 @@ Abdul Basit WFM | BasitWFM AI Decision Engine`
   }
   $('email-copy-btn').style.display = 'inline-flex';
   toast('Email generated successfully!', 'success');
+}
+
+function generateEODSummary() {
+  if (!State.calcData.length || !State.latestSummary || !State.decisionSummary) {
+    return 'No EOD summary available. Run the engine first.';
+  }
+  const d = State.calcData;
+  const avgErr = d.reduce((s, r) => s + r.yourErr, 0) / d.length;
+  const issue = State.latestSummary.totalGap < -10 ? 'Staffing deficit across peak intervals' : 'No major operational issue';
+  return [
+    '1) Performance Summary',
+    `ILA ${fmtPct(100 - avgErr)} | Actual ${fmtNum(State.latestSummary.totalActual)} vs Forecast ${fmtNum(State.latestSummary.totalForecast)}`,
+    '2) Key Issue',
+    issue,
+    '3) Root Cause',
+    State.decisionSummary.rootCause,
+    '4) Actions Taken',
+    State.decisionSummary.actions.map((a, i) => `${i + 1}. ${a}`).join(' | '),
+    '5) Tomorrow Plan',
+    'Run intraday refresh by 10:00, protect peak coverage, and review AHT driver trends with operations leads.'
+  ].join('\n');
 }
 
 /* ── WFM Copilot Chat ─────────────────────────────────────── */
@@ -787,8 +907,19 @@ const CHAT_KB = {
   'help': 'I can help with: SLA analysis, forecast accuracy, agent movement recommendations, ILA explanation, peak window detection, weight tuning, overtime justification, and baseline comparison. What do you need?',
 };
 
-function chatResponse(msg) {
-  const lower = msg.toLowerCase();
+function askCopilot(query) {
+  const lower = query.toLowerCase();
+  const needsDecision = ['why', 'sla', 'what should i do'].some(k => lower.includes(k));
+  if (needsDecision && State.decisionSummary) {
+    return [
+      '🚨 SLA Risk Detected',
+      `Root Cause: ${State.decisionSummary.rootCause}`,
+      `Impact: ${State.decisionSummary.impact}`,
+      'Actions:',
+      ...State.decisionSummary.actions.map(a => `• ${a}`)
+    ].join('\n');
+  }
+
   for (const [key, answer] of Object.entries(CHAT_KB)) {
     if (lower.includes(key)) {
       return enrichChatAnswer(answer);
@@ -852,7 +983,7 @@ function sendChatMessage(text) {
   showTyping();
   setTimeout(() => {
     removeTyping();
-    const response = chatResponse(text);
+    const response = askCopilot(text);
     addChatMessage(response, 'ai');
   }, 800 + Math.random() * 600);
 }
@@ -916,7 +1047,12 @@ function runEngine(rawData) {
   setTimeout(() => {
     State.rawData = rawData;
     State.calcData = calculate(rawData, State.config.totalForecast, State.config.weights);
+    State.latestSummary = summarizeOperationalMetrics(State.calcData);
+    State.decisionSummary = generateDecisionEngine(State.calcData, State.latestSummary);
+    STATE.decisionSummary = State.decisionSummary;
+    State.simulatorDecisionText = generateSimulatorDecisionOutput(State.latestSummary);
     updateDashboardStats();
+    renderDecisionSummary();
     renderTable();
     renderInsights();
     renderWindowStats();
