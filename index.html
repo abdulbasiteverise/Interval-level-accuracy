@@ -254,6 +254,23 @@
           </div>
         </div>
 
+        <div class="card mb-16">
+          <div class="card-header">
+            <div class="card-title">🚨 TODAY'S DECISION SUMMARY</div>
+            <span class="tag" style="background:rgba(240,86,90,.15);color:var(--red);">Operational Decision Engine</span>
+          </div>
+          <div class="card-body">
+            <div class="insight-item risk mb-8"><span class="insight-icon">🧩</span><span><strong>Root Cause:</strong> <span id="decision-root-cause">Load data to detect root cause.</span></span></div>
+            <div class="insight-item warn mb-8"><span class="insight-icon">📉</span><span><strong>Impact:</strong> <span id="decision-impact">Impact will appear after calculation.</span></span></div>
+            <div class="insight-item info"><span class="insight-icon">⚡</span><span><strong>Actions:</strong>
+              <ul id="decision-actions" style="margin:.4rem 0 0 1rem;">
+                <li>No recommended actions yet.</li>
+              </ul>
+            </span></div>
+            <div class="mt-12 text-sm" id="decision-simulator-output" style="color:var(--text2);font-weight:600;"></div>
+          </div>
+        </div>
+
         <!-- Stats -->
         <div class="stat-grid">
           <div class="stat-card accent">
