@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BasitWFM AI – ILA Decision Engine | Abdul Basit WFM</title>
+  <meta name="description" content="BasitWFM AI is an interval-level accuracy (ILA) decision engine for workforce management. Compare forecast vs baseline, detect staffing risks, and generate AI-powered actions. Built by Abdul Basit WFM." />
+  <meta name="keywords" content="interval level accuracy WFM, call center forecasting tool, workforce management AI, intraday planning tool, ILA calculator, forecast accuracy, BasitWFM" />
+  <meta name="author" content="Abdul Basit WFM" />
+  <meta property="og:title" content="BasitWFM AI – ILA Decision Engine" />
+  <meta property="og:description" content="Stop guessing staffing. Start knowing. AI-powered WFM forecasting and ILA decision engine." />
+  <meta property="og:type" content="website" />
+  <!-- GEO / Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BasitWFM AI – ILA Decision Engine",
+    "author": { "@type": "Person", "name": "Abdul Basit" },
+    "description": "Workforce Management AI tool for interval-level accuracy forecasting, staffing decisions, and intraday planning.",
+    "applicationCategory": "BusinessApplication",
+    "keywords": "ILA, interval level accuracy, WFM, workforce management, call center forecasting, intraday planning"
+  }
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LANDING PAGE
+═══════════════════════════════════════════════════════════ -->
+<div id="landing">
+
+  <!-- Nav -->
+  <nav class="lp-nav">
+    <div class="lp-logo">
+      <span style="color:var(--accent);font-size:1.6rem;line-height:1;">⚡</span>
+      Basit<span class="dot">WFM</span> AI
+    </div>
+    <div class="lp-nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="lp-nav-right">
+      <button class="theme-toggle" id="theme-toggle-btn" title="Toggle theme">☀️</button>
+      <button class="btn btn-outline btn-sm" data-cta="launch">Sign In</button>
+      <button class="btn btn-primary btn-sm" data-cta="launch">Try Free ↗</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="lp-hero">
+    <div class="lp-badge">🚀 AI-Powered Workforce Management</div>
+    <h1>Stop Guessing Staffing.<br><span class="hl">Start Knowing.</span></h1>
+    <p>BasitWFM AI uses interval-level accuracy (ILA) and weighted historical distributions to deliver razor-sharp staffing forecasts — and tells you exactly what to do about them.</p>
+    <div class="lp-hero-cta">
+      <button class="btn btn-primary" style="font-size:1rem;padding:.7rem 1.8rem;" data-cta="launch">🚀 Launch BasitWFM AI</button>
+      <button class="btn btn-outline" style="font-size:1rem;padding:.7rem 1.6rem;" data-cta="launch">View Demo →</button>
+    </div>
+    <div style="margin-top:2.5rem;display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--accent);">98.2%</div>
+        <div style="font-size:.8rem;color:var(--text3);">ILA Achievable</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--green);">−14%</div>
+        <div style="font-size:.8rem;color:var(--text3);">Error vs Baseline</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--purple);">∞</div>
+        <div style="font-size:.8rem;color:var(--text3);">Custom Intervals</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="lp-grid">
+      <div class="lp-card">
+        <div class="lp-card-icon">🧠</div>
+        <h3>AI Insight Engine</h3>
+        <p>Automatically detects peak windows, under-forecasting patterns, and risk intervals — no manual analysis required.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">📊</div>
+        <h3>Weighted ILA Calculation</h3>
+        <p>5-week trend-aware weighted distribution (W-1=30%, W-2=25%, etc.) for superior interval-level accuracy vs flat averages.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">🔁</div>
+        <h3>4-Hour Rolling Windows</h3>
+        <p>Identify peak load blocks across your shift with overlapping 4-hour windows shifting every 60 minutes.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">⚡</div>
+        <h3>Action Recommendations</h3>
+        <p>Concrete staffing actions: move agents, approve OT, reduce overstaffing — generated instantly from your data.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">📬</div>
+        <h3>Auto Email Generator</h3>
+        <p>One-click professional emails for daily briefs, risk alerts, and weekly summaries — ready to send to your team.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">🤖</div>
+        <h3>WFM Copilot Chat</h3>
+        <p>Ask questions in plain English: "Why is SLA dropping?" or "Where should I move agents?" Get instant answers.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">🗂️</div>
+        <h3>CSV Upload + Paste</h3>
+        <p>Upload your historical data via CSV or paste directly. Automatically maps columns and runs calculations instantly.</p>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">🎨</div>
+        <h3>Error Heatmap</h3>
+        <p>Visual green-to-red heatmap shows which intervals are stable vs high-risk at a glance. No spreadsheet required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" style="max-width:900px;margin:0 auto;padding:3rem 2rem;">
+    <div class="seo-section">
+      <h2>What is Interval Level Accuracy (ILA)?</h2>
+      <p>Interval Level Accuracy (ILA) measures how precisely your forecast matches actual call/contact volume at every time interval (e.g., every 15 or 30 minutes). Unlike daily accuracy, ILA captures intraday staffing gaps that daily metrics miss entirely.</p>
+      <p><strong>Formula:</strong> ILA = 100% − |Actual Volume − Forecast Volume| ÷ Actual Volume × 100%</p>
+      <p>Achieving >90% ILA at interval level is considered best-in-class for call center workforce management. BasitWFM AI is designed to help teams reach and maintain this standard.</p>
+    </div>
+
+    <div class="seo-section mt-16">
+      <h2>How to Improve Forecast Accuracy in WFM?</h2>
+      <p>Forecast accuracy improves when you combine these techniques:</p>
+      <ul>
+        <li><strong>Recency-weighted historical data</strong> — give more weight to recent weeks (W-1, W-2) to capture current trends.</li>
+        <li><strong>Interval-level distribution splits</strong> — instead of splitting daily forecasts evenly, use actual intraday patterns.</li>
+        <li><strong>Rolling window analysis</strong> — identify peak load windows and pre-position resources before they hit.</li>
+        <li><strong>Systematic error tracking</strong> — compare your model vs baseline continuously and adjust weights accordingly.</li>
+        <li><strong>Intraday recasting</strong> — refresh forecasts midday using actuals to adjust remaining intervals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="max-width:900px;margin:0 auto;padding:0 2rem 3rem;">
+    <div class="seo-section">
+      <h2>Frequently Asked Questions</h2>
+      <p><strong>What is an intraday planning tool?</strong><br>An intraday planning tool helps WFM planners manage real-time staffing during the day by comparing actual vs forecasted volume and recommending agent movements or schedule adjustments.</p>
+      <p><strong>How does BasitWFM AI differ from standard WFM tools?</strong><br>BasitWFM AI adds an AI insight layer on top of standard ILA calculations — automatically generating risk alerts, staffing actions, and email communications that normally require manual analysis.</p>
+      <p><strong>Do I need a backend or server?</strong><br>No. BasitWFM AI runs entirely in your browser. Upload or paste your data and all calculations happen instantly on your device.</p>
+      <p><strong>Can I customise the interval size and weights?</strong><br>Yes — you can set any interval size (15 min, 30 min, custom), start/end time, and adjust the 5-week recency weights in the Settings panel.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="lp-footer">
+    <p>⚡ <strong>BasitWFM AI</strong> — Built with precision by <strong>Abdul Basit WFM</strong> · All calculations run in browser · No data leaves your device</p>
+    <p style="margin-top:.4rem;">Keywords: interval level accuracy WFM · call center forecasting tool · workforce management AI · intraday planning tool</p>
+  </footer>
+</div><!-- /landing -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     APP SHELL
+═══════════════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-dot">⚡</span>
+      Basit<span style="color:var(--accent)">WFM</span> AI
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" data-nav="dashboard">
+        <span class="icon">📊</span> Dashboard
+      </div>
+      <div class="nav-item" data-nav="table">
+        <span class="icon">📋</span> ILA Results Table
+      </div>
+      <div class="nav-item" data-nav="charts">
+        <span class="icon">📈</span> Charts
+      </div>
+      <div class="nav-item" data-nav="heatmap">
+        <span class="icon">🌡️</span> Error Heatmap
+      </div>
+      <div class="nav-item" data-nav="windows">
+        <span class="icon">🔁</span> Rolling Windows
+      </div>
+
+      <div class="nav-section">AI Tools</div>
+      <div class="nav-item" data-nav="insights">
+        <span class="icon">🧠</span> AI Insights
+      </div>
+      <div class="nav-item" data-nav="actions">
+        <span class="icon">⚡</span> Action Engine
+      </div>
+      <div class="nav-item" data-nav="email">
+        <span class="icon">📬</span> Email Generator
+      </div>
+      <div class="nav-item" data-nav="copilot">
+        <span class="icon">🤖</span> WFM Copilot
+      </div>
+
+      <div class="nav-section">Setup</div>
+      <div class="nav-item" data-nav="data">
+        <span class="icon">📂</span> Data Input
+      </div>
+      <div class="nav-item" data-nav="settings">
+        <span class="icon">⚙️</span> Settings
+      </div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-user">
+        <div class="user-avatar">AB</div>
+        <div class="user-info">
+          <div class="user-name">Abdul Basit</div>
+          <div class="user-role">WFM Planner</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <div class="main-area">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">⚡ BasitWFM AI</div>
+        <div class="breadcrumb">ILA <span>Decision Engine</span></div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-outline btn-sm" id="load-sample-btn">🎲 Load Sample</button>
+        <button class="btn btn-outline btn-sm" id="export-csv-btn">⬇ Export CSV</button>
+        <button class="theme-toggle" id="theme-toggle-top" title="Toggle theme">☀️</button>
+        <button class="btn btn-ghost btn-sm" onclick="showLanding()">← Home</button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- ══ DASHBOARD ══ -->
+      <section id="panel-dashboard" class="panel active">
+        <div class="section-head">
+          <div class="section-title">📊 Dashboard <span class="badge">Live</span></div>
+          <div class="flex gap-8">
+            <span class="tag">Auto-refreshes on data change</span>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stat-grid">
+          <div class="stat-card accent">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-label" data-tip="Interval Level Accuracy = 100% minus average error %">ILA Score</div>
+            <div class="stat-value" id="stat-ila">—</div>
+            <div class="stat-sub">Avg across all intervals</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-icon">📈</div>
+            <div class="stat-label" data-tip="How much better your model is vs baseline forecast">ILA Improvement</div>
+            <div class="stat-value" id="stat-improve">—</div>
+            <div class="stat-sub">vs Baseline forecast</div>
+          </div>
+          <div class="stat-card red">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-label" data-tip="Intervals with error greater than 20%">High-Risk Intervals</div>
+            <div class="stat-value" id="stat-risk">—</div>
+            <div class="stat-sub">Error &gt; 20%</div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-icon">📞</div>
+            <div class="stat-label" data-tip="Sum of actual volume across all loaded intervals">Total Actual Volume</div>
+            <div class="stat-value" id="stat-volume">—</div>
+            <div class="stat-sub">Contacts handled</div>
+          </div>
+          <div class="stat-card amber">
+            <div class="stat-icon">📏</div>
+            <div class="stat-label" data-tip="Average baseline forecast error for comparison">Baseline Avg Error</div>
+            <div class="stat-value" id="stat-base-err">—</div>
+            <div class="stat-sub">Your model benchmark</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-icon">🕒</div>
+            <div class="stat-label" data-tip="Total number of intervals analysed in current dataset">Intervals Analysed</div>
+            <div class="stat-value" id="stat-intervals">—</div>
+            <div class="stat-sub">From loaded data</div>
+          </div>
+        </div>
+
+        <!-- Quick Insights + Windows -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🧠 Quick Insights</div>
+              <button class="btn btn-ghost btn-sm" onclick="switchPanel('insights')">See all →</button>
+            </div>
+            <div class="card-body">
+              <div id="insights-list" class="insight-list">
+                <div class="empty-state"><div class="es-icon">🧠</div><h3>Load data to generate insights</h3><p>Click "Load Sample" or upload your CSV.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🔁 4-Hour Window Load</div>
+              <button class="btn btn-ghost btn-sm" onclick="switchPanel('windows')">Details →</button>
+            </div>
+            <div class="card-body">
+              <div id="window-stats"><p class="text-muted text-sm">No data loaded.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart preview -->
+        <div class="mt-16">
+          <div class="chart-container">
+            <div class="card-header" style="border:none;padding-bottom:.5rem;">
+              <div class="card-title">📈 Forecast vs Actual vs Baseline</div>
+              <button class="btn btn-ghost btn-sm" onclick="switchPanel('charts')">Full Chart →</button>
+            </div>
+            <canvas id="line-chart" style="width:100%;height:260px;"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ILA RESULTS TABLE ══ -->
+      <section id="panel-table" class="panel">
+        <div class="section-head">
+          <div class="section-title">📋 ILA Results Table</div>
+          <div class="flex gap-8">
+            <button class="btn btn-outline btn-sm" id="export-csv-btn2" onclick="exportCSV()">⬇ Export CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Interval</th>
+                <th data-tip="5-week weighted distribution % for this interval">Weighted %</th>
+                <th data-tip="Forecast volume = Total Forecast × Weighted Distribution">Forecast</th>
+                <th>Actual</th>
+                <th data-tip="Your Error% = |Actual − Forecast| ÷ Actual × 100">Error %</th>
+                <th data-tip="Baseline Error% = |Actual − Baseline| ÷ Actual × 100">Baseline Err%</th>
+                <th data-tip="ILA Improvement = Baseline Error − Your Error. Positive means your model wins.">Improvement</th>
+                <th>Flag</th>
+                <th>Insight</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="results-tbody">
+              <tr><td colspan="10" class="text-center text-muted" style="padding:2.5rem;">No data loaded. Use the Data Input panel or click Load Sample.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ══ CHARTS ══ -->
+      <section id="panel-charts" class="panel">
+        <div class="section-head">
+          <div class="section-title">📈 Visual Analytics</div>
+        </div>
+        <div class="card mb-16">
+          <div class="card-header">
+            <div class="card-title">Forecast vs Actual vs Baseline — Full View</div>
+            <div class="flex gap-8">
+              <span class="tag" style="background:rgba(79,156,249,.15);color:var(--accent);">━ Forecast</span>
+              <span class="tag" style="background:rgba(34,211,160,.12);color:var(--green);">━ Actual</span>
+              <span class="tag" style="background:rgba(245,158,11,.15);color:var(--amber);">╌ Baseline</span>
+            </div>
+          </div>
+          <div class="card-body" style="padding:.8rem;">
+            <canvas id="line-chart" style="width:100%;height:340px;"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">4-Hour Rolling Window Distribution</div>
+            <span class="text-muted text-xs">Higher bars = heavier load windows. Plan staffing peaks here.</span>
+          </div>
+          <div class="card-body" style="padding:.8rem;">
+            <canvas id="window-chart" style="width:100%;height:260px;"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ HEATMAP ══ -->
+      <section id="panel-heatmap" class="panel">
+        <div class="section-head">
+          <div class="section-title">🌡️ Error Heatmap</div>
+          <div class="flex gap-8">
+            <span class="tag" style="background:rgba(34,211,160,.12);color:var(--green);">🟢 Low Error</span>
+            <span class="tag" style="background:rgba(245,158,11,.15);color:var(--amber);">🟡 Medium</span>
+            <span class="tag" style="background:rgba(240,86,90,.12);color:var(--red);">🔴 High Risk</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Interval-Level Error Heatmap</div>
+            <span class="text-muted text-xs">Hover cells for details. Red = high error. Green = stable.</span>
+          </div>
+          <div class="card-body">
+            <div id="heatmap-container" style="max-height:600px;overflow-y:auto;">
+              <div class="empty-state"><div class="es-icon">🌡️</div><h3>Load data to view heatmap</h3></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ROLLING WINDOWS ══ -->
+      <section id="panel-windows" class="panel">
+        <div class="section-head">
+          <div class="section-title">🔁 4-Hour Rolling Windows</div>
+          <span class="text-muted text-sm">Windows shift every 60 min — 4-hour aggregation</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Window Load Distribution</div></div>
+            <div class="card-body">
+              <div id="window-stats-full"><p class="text-muted text-sm">No data loaded.</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Window Volume Chart</div></div>
+            <div class="card-body" style="padding:.5rem;">
+              <canvas id="window-chart" style="width:100%;height:300px;"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-16">
+          <div class="card-header"><div class="card-title">Understanding Rolling Windows</div></div>
+          <div class="card-body">
+            <p class="text-sm" style="color:var(--text2);line-height:1.7;">The 4-hour rolling window engine aggregates weighted distribution % across overlapping 4-hour blocks, advancing every 60 minutes. This reveals which parts of your operating window carry the heaviest load — critical for pre-positioning agents before peaks hit. Windows with the highest % contribution require maximum headcount and minimum schedule adherence breaks.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ AI INSIGHTS ══ -->
+      <section id="panel-insights" class="panel">
+        <div class="section-head">
+          <div class="section-title">🧠 AI Insights Engine</div>
+          <button class="btn btn-primary btn-sm" onclick="renderInsights(); toast('Insights refreshed!','success');">🔄 Refresh</button>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><div class="card-title">🧠 Auto-Generated Insights</div></div>
+            <div class="card-body">
+              <div id="insights-list" class="insight-list">
+                <div class="empty-state"><div class="es-icon">🧠</div><h3>No insights yet</h3><p>Load data to generate AI insights.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">⚡ Staffing Actions</div></div>
+            <div class="card-body">
+              <div id="actions-list" class="action-list">
+                <div class="empty-state"><div class="es-icon">⚡</div><h3>No actions yet</h3><p>Load data to generate recommendations.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight Engine Rules -->
+        <div class="card mt-16">
+          <div class="card-header"><div class="card-title">📖 Insight Engine Rules</div></div>
+          <div class="card-body">
+            <div class="grid-3">
+              <div class="insight-item info">
+                <span class="insight-icon">📊</span>
+                <span><strong>Peak Detection</strong>: Identifies 4-hour windows with highest weighted distribution % contribution.</span>
+              </div>
+              <div class="insight-item warn">
+                <span class="insight-icon">📉</span>
+                <span><strong>Under-Forecast Alert</strong>: Triggered when &gt;30% of intervals have forecast below 90% of actual.</span>
+              </div>
+              <div class="insight-item risk">
+                <span class="insight-icon">🔴</span>
+                <span><strong>Risk Flagging</strong>: Any interval with error &gt;20% is flagged HIGH RISK and escalated to action engine.</span>
+              </div>
+              <div class="insight-item good">
+                <span class="insight-icon">✅</span>
+                <span><strong>Best Window</strong>: Top 3 lowest-error intervals highlighted as model strengths.</span>
+              </div>
+              <div class="insight-item warn">
+                <span class="insight-icon">📈</span>
+                <span><strong>Over-Forecast Pattern</strong>: Triggered when &gt;30% of intervals exceed actual by 15%+ — wasteful overstaffing.</span>
+              </div>
+              <div class="insight-item info">
+                <span class="insight-icon">🏆</span>
+                <span><strong>Baseline Comparison</strong>: Overall ILA improvement vs baseline gives a single headline performance metric.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ACTION ENGINE ══ -->
+      <section id="panel-actions" class="panel">
+        <div class="section-head">
+          <div class="section-title">⚡ Action Engine</div>
+          <span class="text-muted text-sm">AI-generated staffing recommendations from your data</span>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Recommended Staffing Actions</div></div>
+          <div class="card-body">
+            <div id="actions-list" class="action-list">
+              <div class="empty-state"><div class="es-icon">⚡</div><h3>No actions generated</h3><p>Load data to generate AI-powered staffing recommendations.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-16">
+          <div class="card-header"><div class="card-title">📋 Action Framework</div></div>
+          <div class="card-body">
+            <div class="insight-item info mt-8"><span class="insight-icon">1️⃣</span><span><strong>Agent Movement</strong>: Identified by comparing surplus (OVER) intervals vs deficit (HIGH RISK) intervals. The engine suggests specific shift of agents between windows.</span></div>
+            <div class="insight-item warn mt-8"><span class="insight-icon">2️⃣</span><span><strong>Overtime Authorisation</strong>: Triggered for HIGH RISK intervals where error exceeds 20%. Quantifies approximate OT hours needed.</span></div>
+            <div class="insight-item good mt-8"><span class="insight-icon">3️⃣</span><span><strong>Schedule Optimisation</strong>: Recommends break timing, lunch offset, and interval coverage adjustments to smooth headcount curve.</span></div>
+            <div class="insight-item risk mt-8"><span class="insight-icon">4️⃣</span><span><strong>Intraday Recast</strong>: Recommends 30-min midday reforecast refresh using actuals to course-correct afternoon staffing.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ EMAIL GENERATOR ══ -->
+      <section id="panel-email" class="panel">
+        <div class="section-head">
+          <div class="section-title">📬 Auto Email Generator</div>
+          <span class="text-muted text-sm">One-click professional WFM communications</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Select Email Type</div></div>
+            <div class="card-body">
+              <p class="text-sm text-muted mb-12">Choose a template and click generate. The email will be populated with your current data automatically.</p>
+              <div class="flex gap-8" style="flex-direction:column;">
+                <button class="btn btn-outline" style="justify-content:flex-start;gap:1rem;" data-email-type="daily">
+                  <span style="font-size:1.3rem;">📊</span>
+                  <span>
+                    <div class="fw-700">Daily Brief</div>
+                    <div class="text-xs text-muted">Volume forecast + staffing plan for today</div>
+                  </span>
+                </button>
+                <button class="btn btn-outline" style="justify-content:flex-start;gap:1rem;border-color:rgba(240,86,90,.4);" data-email-type="alert">
+                  <span style="font-size:1.3rem;">⚠️</span>
+                  <span>
+                    <div class="fw-700" style="color:var(--red)">Risk Alert</div>
+                    <div class="text-xs text-muted">Urgent action required for high-risk intervals</div>
+                  </span>
+                </button>
+                <button class="btn btn-outline" style="justify-content:flex-start;gap:1rem;" data-email-type="summary">
+                  <span style="font-size:1.3rem;">📋</span>
+                  <span>
+                    <div class="fw-700">Weekly Summary</div>
+                    <div class="text-xs text-muted">ILA performance scorecard and opportunities</div>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Email Preview</div>
+              <button class="btn btn-success btn-sm" id="email-copy-btn" style="display:none;">📋 Copy</button>
+            </div>
+            <div class="card-body">
+              <div class="email-preview" id="email-preview">
+                <div class="email-subject">Click a template to generate email →</div>
+                <div class="email-meta">
+                  <span>From: WFM Planning Team</span>
+                  <span>To: Operations Manager</span>
+                </div>
+                <div class="email-body" style="white-space:pre-wrap;font-size:.85rem;line-height:1.7;color:var(--text2);">Select an email type on the left to generate a professional WFM communication based on your current data.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ WFM COPILOT ══ -->
+      <section id="panel-copilot" class="panel">
+        <div class="section-head">
+          <div class="section-title">🤖 WFM Copilot <span class="badge">AI Chat</span></div>
+        </div>
+        <div class="chat-wrap">
+          <div class="chat-quick">
+            <button class="quick-btn">Why is SLA dropping?</button>
+            <button class="quick-btn">Where should I move agents?</button>
+            <button class="quick-btn">What is ILA?</button>
+            <button class="quick-btn">Explain peak windows</button>
+            <button class="quick-btn">How do weights work?</button>
+            <button class="quick-btn">When should I approve OT?</button>
+          </div>
+          <div class="chat-messages" id="chat-messages">
+            <!-- Messages injected by JS -->
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chat-input" placeholder="Ask your WFM Copilot… (e.g. Why is SLA dropping?)" />
+            <button class="btn btn-primary" id="chat-send-btn">Send ↗</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ DATA INPUT ══ -->
+      <section id="panel-data" class="panel">
+        <div class="section-head">
+          <div class="section-title">📂 Data Input</div>
+        </div>
+
+        <div class="tabs">
+          <div class="tab active" data-tab="upload" data-tab-group="data">📁 CSV Upload</div>
+          <div class="tab" data-tab="paste" data-tab-group="data">📋 Paste Data</div>
+          <div class="tab" data-tab="sample" data-tab-group="data">🎲 Sample Data</div>
+          <div class="tab" data-tab="format" data-tab-group="data">📖 Data Format</div>
+        </div>
+
+        <div class="tab-panel active" id="tab-upload" data-tab-group="data">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Upload CSV File</div></div>
+            <div class="card-body">
+              <div class="drop-zone" id="drop-zone">
+                <div class="dz-icon">📁</div>
+                <p><strong>Drop CSV file here</strong> or click to browse</p>
+                <p style="font-size:.8rem;margin-top:.4rem;color:var(--text3);">Supported: .csv files with interval data</p>
+              </div>
+              <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none;" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-paste" data-tab-group="data">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Paste Data (CSV or Tab-separated)</div></div>
+            <div class="card-body">
+              <p class="text-sm text-muted mb-12">Paste your data with headers in the first row. Comma or tab separated.</p>
+              <textarea class="form-control" id="paste-area" placeholder="Interval,W5 Volume,W4 Volume,W3 Volume,W2 Volume,W1 Volume,Actual Volume,Baseline Forecast
+08:00,120,130,115,125,118,122,110
+08:30,145,155,140,150,148,152,140
+09:00,180,190,175,185,183,188,175
+..."></textarea>
+              <button class="btn btn-primary mt-12" id="paste-apply-btn">⚡ Apply Pasted Data</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-sample" data-tab-group="data">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Load Sample Dataset</div></div>
+            <div class="card-body">
+              <p class="text-sm text-muted mb-12">Load a realistic auto-generated sample dataset based on your current configuration (interval size, start/end time). Great for exploring the tool.</p>
+              <div class="insight-item info mb-12">
+                <span class="insight-icon">💡</span>
+                <span>Sample data simulates a typical contact centre day with morning buildup, midday peak, afternoon plateau, and evening wind-down. Volume is randomised with realistic noise per week.</span>
+              </div>
+              <button class="btn btn-primary" id="load-sample-btn">🎲 Generate & Load Sample Data</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-format" data-tab-group="data">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Expected Data Format</div></div>
+            <div class="card-body">
+              <p class="text-sm text-muted mb-12">Your CSV should contain these columns (headers are flexible — the tool auto-detects):</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Column</th><th>Description</th><th>Example</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="td-label">Interval</td><td class="td-insight">Time of the interval (HH:MM)</td><td class="font-mono">08:30</td></tr>
+                    <tr><td class="td-label">W5 Volume</td><td class="td-insight">Volume 5 weeks ago at this interval</td><td class="font-mono">145</td></tr>
+                    <tr><td class="td-label">W4 Volume</td><td class="td-insight">Volume 4 weeks ago</td><td class="font-mono">138</td></tr>
+                    <tr><td class="td-label">W3 Volume</td><td class="td-insight">Volume 3 weeks ago</td><td class="font-mono">152</td></tr>
+                    <tr><td class="td-label">W2 Volume</td><td class="td-insight">Volume 2 weeks ago</td><td class="font-mono">160</td></tr>
+                    <tr><td class="td-label">W1 Volume</td><td class="td-insight">Last week's volume (highest weight)</td><td class="font-mono">155</td></tr>
+                    <tr><td class="td-label">Actual Volume</td><td class="td-insight">This week's actual volume</td><td class="font-mono">158</td></tr>
+                    <tr><td class="td-label">Baseline Forecast</td><td class="td-insight">Your existing/baseline forecast</td><td class="font-mono">140</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="insight-item info mt-12">
+                <span class="insight-icon">💡</span>
+                <span>Total Forecast (single daily value) is set in Settings. The engine distributes it across intervals using weighted historical patterns.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ SETTINGS ══ -->
+      <section id="panel-settings" class="panel">
+        <div class="section-head">
+          <div class="section-title">⚙️ Settings & Configuration</div>
+          <button class="btn btn-primary" id="cfg-apply-btn">✅ Apply & Recalculate</button>
+        </div>
+
+        <div class="grid-2">
+          <!-- Interval Config -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">🕒 Interval Configuration</div></div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label" data-tip="Size of each time interval in minutes">Interval Size (minutes)</label>
+                <select class="form-control" id="cfg-interval">
+                  <option value="15">15 minutes</option>
+                  <option value="30" selected>30 minutes</option>
+                  <option value="60">60 minutes</option>
+                  <option value="custom">Custom…</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Start Time</label>
+                  <input type="time" class="form-control" id="cfg-start" value="08:00" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">End Time</label>
+                  <input type="time" class="form-control" id="cfg-end" value="22:00" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-tip="Total daily forecast volume to be distributed across intervals">Total Daily Forecast Volume</label>
+                <input type="number" class="form-control" id="cfg-total" value="5000" min="1" />
+                <div class="form-hint">This is the single total value distributed across all intervals using weighted distribution.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weights -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">⚖️ Recency Weights</div>
+              <span class="text-muted text-xs" data-tip="All 5 weights must sum to exactly 100%">Must sum to 100%</span>
+            </div>
+            <div class="card-body">
+              <p class="text-sm text-muted mb-12">Adjust how much influence each historical week has on the forecast. Recent weeks (W-1, W-2) should carry higher weight.</p>
+              <div class="form-group">
+                <label class="form-label">W-1 Weight (Last Week) <span class="text-accent fw-700" id="w1-label">30%</span></label>
+                <input type="range" class="form-control" id="cfg-w1" min="0" max="60" value="30" oninput="$('w1-label').textContent=this.value+'%'" style="padding:.3rem 0;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">W-2 Weight <span class="text-accent fw-700" id="w2-label">25%</span></label>
+                <input type="range" class="form-control" id="cfg-w2" min="0" max="60" value="25" oninput="$('w2-label').textContent=this.value+'%'" style="padding:.3rem 0;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">W-3 Weight <span class="text-accent fw-700" id="w3-label">20%</span></label>
+                <input type="range" class="form-control" id="cfg-w3" min="0" max="60" value="20" oninput="$('w3-label').textContent=this.value+'%'" style="padding:.3rem 0;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">W-4 Weight <span class="text-accent fw-700" id="w4-label">15%</span></label>
+                <input type="range" class="form-control" id="cfg-w4" min="0" max="60" value="15" oninput="$('w4-label').textContent=this.value+'%'" style="padding:.3rem 0;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">W-5 Weight (5 Weeks Ago) <span class="text-accent fw-700" id="w5-label">10%</span></label>
+                <input type="range" class="form-control" id="cfg-w5" min="0" max="60" value="10" oninput="$('w5-label').textContent=this.value+'%'" style="padding:.3rem 0;" />
+              </div>
+              <div class="insight-item warn mt-8">
+                <span class="insight-icon">⚠️</span>
+                <span>All weights must sum to <strong>100%</strong>. Click Apply to validate and recalculate.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="card mt-16">
+          <div class="card-header"><div class="card-title">ℹ️ About BasitWFM AI</div></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div>
+                <p class="text-sm" style="line-height:1.7;color:var(--text2);">
+                  <strong>BasitWFM AI – ILA Decision Engine</strong> is a production-grade workforce management tool built for WFM planners who need precision at the interval level. All calculations run entirely in your browser — no data ever leaves your device.
+                </p>
+                <p class="text-sm mt-8" style="line-height:1.7;color:var(--text2);">
+                  Built by <strong>Abdul Basit WFM</strong> — combining deep WFM expertise with modern AI-driven insight generation.
+                </p>
+              </div>
+              <div class="insight-item info">
+                <span class="insight-icon">🔐</span>
+                <span><strong>Privacy first.</strong> All calculations are client-side. Your workforce data never leaves your browser. No backend. No server. No tracking.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /content -->
+  </div><!-- /main-area -->
+</div><!-- /app -->
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Running ILA Engine…</div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<script src="script.js"></script>
+
+<!-- Inline fix for duplicate canvas IDs and window-stats-full -->
+<script>
+// Sync window-stats-full with window-stats on windows panel activation
+document.querySelector('[data-nav="windows"]').addEventListener('click', function() {
+  const src = document.getElementById('window-stats');
+  const dst = document.getElementById('window-stats-full');
+  if (src && dst) dst.innerHTML = src.innerHTML;
+});
+
+// Fix duplicate canvas IDs by using panel-specific canvases
+// The charts panel uses its own canvases; dashboard uses dashboard's.
+// On panel switch to charts, force redraw on charts-panel canvases
+document.querySelector('[data-nav="charts"]').addEventListener('click', function() {
+  setTimeout(() => {
+    // Draw on the charts panel canvases explicitly
+    const lc = document.querySelectorAll('#line-chart')[1] || document.querySelector('#panel-charts #line-chart') || document.getElementById('line-chart');
+    const wc = document.querySelectorAll('#window-chart')[1] || document.querySelector('#panel-charts #window-chart') || document.getElementById('window-chart');
+    if (State && State.calcData && State.calcData.length) {
+      if (lc) { const ctx=lc.getContext('2d'); ctx.clearRect(0,0,lc.width,lc.height); }
+      drawLineChart();
+      drawWindowChart();
+    }
+  }, 150);
+});
+</script>
+</body>
+</html>
